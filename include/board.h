@@ -11,6 +11,7 @@ class Board
         void drawSquare(int width, int height, char color);
         void setBoardSquare(int x, int y, char color);
         void drawBoard();
+        void clearBoard();
     
 };
 #endif

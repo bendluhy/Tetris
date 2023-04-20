@@ -8,7 +8,7 @@
 
 int main()
 {
-	std::cout << "Launching tetris";
+	std::cout << "Launching Tetris";
 	SDL_Window *window = SDL_CreateWindow(
 		"Tetris",
 		SDL_WINDOWPOS_UNDEFINED,

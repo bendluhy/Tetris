@@ -3,13 +3,8 @@
 Board::Board(Renderer* ren)
 {
     pRen = ren;
-    for(int x = 0; x < 10; x++)
-    {
-        for (int y = 0; y < 20; y++)
-        {
-            board[y][x] = 'X';
-        }
-    }
+    clearBoard();
+    
 };
 void Board::setBoardSquare(int x, int y, char color)
 {
@@ -32,3 +27,13 @@ void Board::drawBoard()
         }
     }
 }
+void Board::clearBoard()
+{
+    for (int x = 0; x < 10; x++)
+    {
+        for (int y = 0; y < 20; y++)
+        {
+            board[y][x] = 'X';
+        }
+    }
+};
