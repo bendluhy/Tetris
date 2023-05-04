@@ -5,6 +5,9 @@
 Renderer::Renderer(SDL_Renderer* pRen)
 {
 	renderer = pRen;
+	SDL_SetRenderDrawColor(renderer, 30, 30, 30, 0);
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 };
 void Renderer::drawSquare(int x, int y, int h, int w, int r, int g, int b)
 {
@@ -65,6 +68,11 @@ void Renderer::renderTetrimino(int x, int y, char block)
 		default:
 			std::cout << "Not matching tetrimino for character" << std::endl;	
 	}
+}
+void Renderer::clearScreen()
+{
+	SDL_SetRenderDrawColor(renderer, 30, 30, 30, 0);
+	SDL_RenderClear(renderer);
 }
 void Renderer::renderTetrisBlock(int x, int y, char c)
 {

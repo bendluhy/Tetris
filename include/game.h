@@ -2,15 +2,18 @@
 #define GAME_H
 #include "board.h"
 #include "renderer.h"
+#include <iostream>
+
 class Game
 {
     private:
         void spawnNewBlock();
-        Board* board;
     public:
-        Game(Renderer* ren);
+        Board* pBoard;
+        Game(Renderer* ren, Board* board);
         void tick();
         void pollKeystrokes();
+        void loop();
 };
 
 #endif

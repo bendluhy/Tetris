@@ -12,5 +12,6 @@ class Renderer
         void drawSquare(int x, int y, int h, int w, int r, int g, int b);
         void renderTetrisBlock(int x, int y, char c);
         void renderTetrimino(int x, int y, char block);
+        void clearScreen();
 };
 #endif
