@@ -1,4 +1,5 @@
 #include "board.h"
+#include "mutexHelper.h"
 
 Board::Board(Renderer* ren)
 {
@@ -14,7 +15,9 @@ void Board::setBoardSquare(int x, int y, char color)
     }
     else 
     {
+        mtx.lock();
         board[y - 1][x - 1] = color;
+        mtx.unlock();
     }
 }
 char Board::getBoardSquare(int x, int y)
@@ -31,6 +34,17 @@ char Board::getBoardSquare(int x, int y)
 }
 void Board::drawBoard()
 {
+    //Render the walls 
+    for (int y = 0; y < 1501; y += 50)
+    {
+        
+        pRen->renderTetrisBlock(450, y, 'g');
+    }
+    for (int y = 0; y < 1501; y += 50)
+    {
+        pRen->renderTetrisBlock(1000, y, 'g');
+    }
+
     for(int x = 0; x < 10; x++)
     {
         for (int y = 0; y < 20; y++)
@@ -48,7 +62,9 @@ void Board::clearBoard()
     {
         for (int y = 0; y < 20; y++)
         {
+            mtx.lock();
             board[y][x] = 'X';
+            mtx.unlock();
         }
     }
 };

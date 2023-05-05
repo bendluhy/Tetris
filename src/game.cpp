@@ -1,5 +1,7 @@
+#include "mutexHelper.h"
 
 #include "game.h"
+
 Game::Game(Renderer *ren, Board *board)
 {
     pBoard = board;
@@ -18,16 +20,22 @@ void Game::tick()
     {
         for (int y = 1; y < 21; y++)  
         {
-            std::cout << x << ":" << y << "\n";
-            if (y < 20)
+            //Check if block isn't empty
+            if(pBoard->getBoardSquare(x,y) != 'X')
             {
-                
-                if (pBoard->getBoardSquare(x, y + 1) == 'X')
+                //check if block isn't on the ground
+                if (y < 20)
                 {
-                    std::cout << "Drop occuring at " << x << ":" << y << "\n";
-                    pBoard->setBoardSquare(x, y + 1, pBoard->getBoardSquare(x, y));
-                    pBoard->setBoardSquare(x,y, 'X');
-                    pBoard->drawBoard();
+                    //check if space below block is empty
+                    if (pBoard->getBoardSquare(x, y + 1) == 'X')
+                    {
+                        std::cout << "Drop occuring at " << x << ":" << y << "->" << x << ":" << y +1 << "\n";
+
+                        //set the space below as block and set the old space as empty
+                        pBoard->setBoardSquare(x, y + 1, pBoard->getBoardSquare(x, y));
+                        pBoard->setBoardSquare(x, y, 'X');
+                        pBoard->drawBoard();
+                    }
                 }
             }
         }

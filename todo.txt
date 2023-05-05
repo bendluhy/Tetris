@@ -1,0 +1,8 @@
+rendering:
+    setup sdl:[X]
+    render tetris blocks:[X]
+board:
+    render blocks with array:[X]
+    make blocks fall:[X]
+game:
+    make game loop and threads to control: []

@@ -1,16 +1,20 @@
 
-#include<math.h>
-#include <iostream>
 #define SDL_MAIN_HANDLED
+#include<math.h>	
+#include <iostream>
+#include <thread>
 #include <SDL2/SDL.h>
 #include "renderer.h"
 #include "game.h"
 #include "board.h"
-#include <thread>
 
+void runGame(Game *game)
+{
+	game->loop();
+}
 int main()
 {
-	std::cout << "Launching Tetris\n";
+	std::cout << "Launching Tetris!\n";
 	SDL_Window *window = SDL_CreateWindow(
 		"Tetris",
 		SDL_WINDOWPOS_UNDEFINED,
@@ -22,21 +26,14 @@ int main()
 	Renderer* pRen = new Renderer(renderer);
 	Board* board= new Board(pRen);
 	Game* game = new Game(pRen, board);
+	
 	board->setBoardSquare(2,2,'G');
 	board->setBoardSquare(2,1,'R');
+	
 	bool isOn = true;
+	//std::thread gameThread(runGame, game);
 	while (isOn)
-	{
-		//render walls
-		for (int y = 0; y < 1501; y += 50)
-		{
-			pRen->renderTetrisBlock(450,y,'g');
-		}
-		for (int y = 0; y < 1501; y += 50)
-		{
-			pRen->renderTetrisBlock(1000,y,'g');
-		}
-		
+	{		
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
@@ -71,6 +68,7 @@ int main()
 		SDL_RenderPresent(renderer);
 		pRen->clearScreen();
 	}
+	//gameThread.join();
 	delete game;
 	delete pRen;
 	SDL_DestroyRenderer(renderer);
