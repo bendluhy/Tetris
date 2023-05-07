@@ -5,4 +5,5 @@ board:
     render blocks with array:[X]
     make blocks fall:[X]
 game:
-    make game loop and threads to control: []
+    get thread working:[X]
+    make game loop: [X]

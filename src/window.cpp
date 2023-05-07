@@ -1,23 +1,16 @@
 #include "gfx/window.h"
-
+#include "board.h"
+#include "renderer.h"
 int window(void *data)
 {
 	extern bool running;
+	extern Board *pBoard;
+	extern Renderer *pRen;
+	extern SDL_Window *win;
+	extern SDL_Renderer *pSRen;
     std::cout << "Launching Tetris!\n";
-	SDL_Window *window = SDL_CreateWindow(
-		"Tetris",
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		1500,
-		1000,
-		0);
-	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-	Renderer* pRen = new Renderer(renderer);
-	Board* board= new Board(pRen);
-	board->setBoardSquare(2,2,'G');
-	board->setBoardSquare(2,1,'R');
 	
-	
+		
 	while (running)
 	{		
 		SDL_Event event;
@@ -27,7 +20,7 @@ int window(void *data)
 			{
 				running = false;
 			}
-			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(window))
+			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(win))
 			{
 				running = false;
 			}
@@ -49,13 +42,13 @@ int window(void *data)
 
 			}
 		}
-		board->drawBoard();
-		SDL_RenderPresent(renderer);
+		pBoard->drawBoard();
+		SDL_RenderPresent(pSRen);
 		pRen->clearScreen();
 	}
 	delete pRen;
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(pSRen);
+	SDL_DestroyWindow(win);
 	SDL_Quit();
 
 	return 0;

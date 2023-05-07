@@ -3,6 +3,7 @@
 #include "board.h"
 #include "renderer.h"
 #include <iostream>
+#include <vector>
 
 class Game
 {
@@ -10,7 +11,7 @@ class Game
         void spawnNewBlock();
     public:
         Board* pBoard;
-        Game(Renderer* ren, Board* board);
+        Game(Board* board);
         void tick();
         void pollKeystrokes();
         void loop();
